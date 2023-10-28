@@ -20,19 +20,19 @@ namespace RaadTestSSO.Controllers
             return View();
         }*/
 
-        [HttpPost]
-        [Route("saml/AssertionConsumer")]
+        [HttpGet]
+        [Route("saml/AssertionConsumerService")]
         public ActionResult SamlAcs()
         {
             // Get the SAML Response from the form data
-            string samlResponse = Request.Form["SAMLResponse"];
+            //string samlResponse = Request.Form["SAMLResponse"];
 
             // Process and validate the SAML response
             try
             {
                 // Load the SAML response into an XML document
-                XmlDocument samlResponseXml = new XmlDocument();
-                samlResponseXml.LoadXml(samlResponse);
+                //XmlDocument samlResponseXml = new XmlDocument();
+                //samlResponseXml.LoadXml(samlResponse);
 
                 // Perform SAML response validation, such as checking the signature
                 // You may need to configure your SAML library for this step
@@ -51,7 +51,7 @@ namespace RaadTestSSO.Controllers
                 //FormsAuthentication.SetAuthCookie(username, false);
 
                 // Redirect to a post-login landing page
-                return RedirectToAction("Welcome", "Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace RaadTestSSO.Controllers
             {
 
                 // Redirect to a post-login landing page
-                return RedirectToAction("Welcome", "Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
