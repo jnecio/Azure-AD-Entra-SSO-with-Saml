@@ -9,18 +9,8 @@ namespace RaadTestSSO.Controllers
 {
     public class SamlAssertionConsumerServiceController : Controller
     {
-        /*[HttpPost]
-        public IActionResult Post()
-        {
-            // Handle and process the incoming SAML assertion here
-            // Validate the assertion, create or update the user session, and perform application-specific actions
 
-            // Return a response as needed
-
-            return View();
-        }*/
-
-        [HttpGet]
+        [HttpPost]
         [Route("saml/AssertionConsumerService")]
         public ActionResult SamlAcs()
         {
@@ -69,7 +59,7 @@ namespace RaadTestSSO.Controllers
             {
 
                 // Redirect to a post-login landing page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Home");
             }
             catch (Exception ex)
             {
