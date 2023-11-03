@@ -78,5 +78,24 @@ namespace RaadTestSSO.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("saml/Logout")]
+        public ActionResult SamlLogout()
+        {
+            try
+            {
+                HttpContext?.Session?.Remove("LandingPage");
+
+                // Redirect to a post-login landing page
+                return RedirectToAction("Login", "Home");
+            }
+            catch (Exception ex)
+            {
+                // Handle SAML response validation or processing errors
+                // You should implement proper error handling and logging here.
+                return View("Error");
+            }
+        }
+
     }
 }
