@@ -26,7 +26,7 @@ namespace RaadTestSSO.Controllers
             try
             {
 
-                var redirectToPage = string.Empty;
+                var redirectToPage = "Login";
                 // SAML assertion handling logic
                 var landingPage = HttpContext?.Session?.GetString("LandingPage") as string;
                 

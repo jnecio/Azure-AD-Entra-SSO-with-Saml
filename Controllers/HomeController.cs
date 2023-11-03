@@ -22,7 +22,7 @@ namespace RaadTestSSO.Controllers
         {
             // Retrieve the target landing page from the session or cookie
             var landingPage = HttpContext?.Session?.GetString("LandingPage") as string;
-            var ssoLogin = "https://account.activedirectory.windowsazure.com/applications/testfedaratedapplication.aspx?servicePrincipalId=1e87d63d-4457-4dc8-bf71-2d45f4c79fda&tenantId=df950190-21a4-4090-9a02-7bb4a5471d57";
+            var ssoLogin = "https://login.microsoftonline.com/df950190-21a4-4090-9a02-7bb4a5471d57/saml2?SAMLRequest=jZFPT8JAEMW%2FSrN3%2Bh9ZN22TQiEhYmIAPXgbyxiatLt1Z4rGT%2B9SwoloPM5k5s37vckIurZX5cBHvcWPAYm9r67VlIvBamWAGlIaOiTFtdqVjxsV%2B6HqkOEADMJbV7lYybSSUpZlMk%2FTRTSXaZrMpmW6lHEUVvdL4b2gpcboXLhlt0M04FoTg2bXCuNkEkWTMNmHMxVFanrnyzB%2BPc89AVFzwly8Q0sovJIILTulhdE0dGh3aE9Njc%2FbTS6OzD2pILAAB3YgPnwPFj%2FxjRpX%2Bho5ONMGv4mIC7kaI%2Fmbv7eGTW1a4a2MrXGM72qyyEY%2B%2B58c4WpFFFvneucu741pHxrOgotKkQW3Lyp%2BAA%3D%3D";
 
             if (!string.IsNullOrEmpty(landingPage))
             {
