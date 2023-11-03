@@ -52,7 +52,7 @@ namespace RaadTestSSO
             buildApp.UseAuthorization();
             buildApp.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Login}");
 
             buildApp.Run();
 

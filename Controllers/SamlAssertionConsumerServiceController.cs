@@ -28,19 +28,10 @@ namespace RaadTestSSO.Controllers
 
                 var redirectToPage = "Login";
                 // SAML assertion handling logic
-                var landingPage = HttpContext?.Session?.GetString("LandingPage") as string;
                 
-                if (!string.IsNullOrEmpty(landingPage))
-                {
-                    HttpContext?.Session?.SetString("LandingPage", "Index");
-                    // Redirect the user to the target landing page
-                    redirectToPage = landingPage;
-                }
-                else
-                {
-                    HttpContext?.Session?.Remove("LandingPage");
-                    redirectToPage = "Login";
-                }
+                HttpContext?.Session?.SetString("LandingPage", "Index");
+
+                // Redirect the user to the target landing page
 
 
                 // Perform SAML response validation, such as checking the signature
