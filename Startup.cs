@@ -22,7 +22,7 @@ namespace RaadTestSSO
             {
                 // Configure your SAML options here, including the ACS URL.
                 options.SPOptions.EntityId = new EntityId("RaadSamlToolKit");
-                options.SPOptions.ReturnUrl = new Uri("https://jonneldemosite.azurewebsites.net/SAML/AssertionConsumerService");
+                options.SPOptions.ReturnUrl = new Uri("https://raadtest.azurewebsites.net/SAML/AssertionConsumerService");
                 // ... other SAML options
             });
         }
