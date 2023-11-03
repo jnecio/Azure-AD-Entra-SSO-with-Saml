@@ -21,13 +21,13 @@ namespace RaadTestSSO.Controllers
         public IActionResult Login()
         {
             // Retrieve the target landing page from the session or cookie
-            var email = HttpContext?.Session?.GetString("Email") as string;
+            var landingPage = HttpContext?.Session?.GetString("LandingPage") as string;
             var ssoLogin = "https://account.activedirectory.windowsazure.com/applications/testfedaratedapplication.aspx?servicePrincipalId=1e87d63d-4457-4dc8-bf71-2d45f4c79fda&tenantId=df950190-21a4-4090-9a02-7bb4a5471d57";
 
-            if (!string.IsNullOrEmpty(email))
+            if (!string.IsNullOrEmpty(landingPage))
             {
                 // Redirect the user to the target landing page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(landingPage, "Home");
             }
 
             // Redirect to a post-login landing page

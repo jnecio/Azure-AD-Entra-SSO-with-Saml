@@ -26,23 +26,22 @@ namespace RaadTestSSO.Controllers
             try
             {
 
-                // SAML assertion handling logic
-                var result = HttpContext.AuthenticateAsync(Saml2Defaults.Scheme).Result;
                 var redirectToPage = string.Empty;
-
-                if (result.Succeeded)
+                // SAML assertion handling logic
+                var landingPage = HttpContext?.Session?.GetString("LandingPage") as string;
+                
+                if (!string.IsNullOrEmpty(landingPage))
                 {
-                    // User is authenticated via SAML
-                    // You can access user claims and perform further actions
-                    var nameIdentifier = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
-                    HttpContext.Session?.SetString("Email", nameIdentifier ?? string.Empty);
-                    redirectToPage = "Index";
+                    HttpContext?.Session?.SetString("LandingPage", "Index");
+                    // Redirect the user to the target landing page
+                    redirectToPage = landingPage;
                 }
                 else
                 {
-                   HttpContext.Session?.Remove("Email");
-                   redirectToPage = "Login";
+                    HttpContext?.Session?.Remove("LandingPage");
+                    redirectToPage = "Login";
                 }
+
 
                 // Perform SAML response validation, such as checking the signature
                 // You may need to configure your SAML library for this step
