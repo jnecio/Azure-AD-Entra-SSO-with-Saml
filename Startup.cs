@@ -10,7 +10,6 @@ namespace RaadTestSSO
         public void ConfigureServices(IServiceCollection services)
         {
             // ... other configurations
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -31,37 +30,31 @@ namespace RaadTestSSO
         public void Configure(IApplicationBuilder app)
         {
             // ... other middleware configurations
-
             app.UseAuthentication();
 
-
             var builder = WebApplication.CreateBuilder();
-
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            var app2 = builder.Build();
+            builder.Services.AddSession();
+            var buildApp = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app2.Environment.IsDevelopment())
+            if (!buildApp.Environment.IsDevelopment())
             {
-                app2.UseExceptionHandler("/Home/Error");
+                buildApp.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app2.UseHsts();
+                buildApp.UseHsts();
             }
-
-            app2.UseHttpsRedirection();
-            app2.UseStaticFiles();
-
-            app2.UseRouting();
-
-            app2.UseAuthorization();
-
-            app2.MapControllerRoute(
+            buildApp.UseSession();
+            buildApp.UseHttpsRedirection();
+            buildApp.UseStaticFiles();
+            buildApp.UseRouting();
+            buildApp.UseAuthorization();
+            buildApp.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app2.Run();
+            buildApp.Run();
 
 
         }

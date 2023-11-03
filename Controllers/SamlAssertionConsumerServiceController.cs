@@ -4,6 +4,11 @@ using Microsoft.IdentityModel.Tokens.Saml2;
 //using Microsoft.IdentityModel.Tokens.Saml2;
 //using Sustainsys.Saml2.Tokens;
 using System.Xml;
+using Sustainsys.Saml2;
+using Sustainsys.Saml2.AspNetCore2;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace RaadTestSSO.Controllers
 {
@@ -20,9 +25,24 @@ namespace RaadTestSSO.Controllers
             // Process and validate the SAML response
             try
             {
-                // Load the SAML response into an XML document
-                //XmlDocument samlResponseXml = new XmlDocument();
-                //samlResponseXml.LoadXml(samlResponse);
+
+                // SAML assertion handling logic
+                var result = HttpContext.AuthenticateAsync(Saml2Defaults.Scheme).Result;
+                var redirectToPage = string.Empty;
+
+                if (result.Succeeded)
+                {
+                    // User is authenticated via SAML
+                    // You can access user claims and perform further actions
+                    var nameIdentifier = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
+                    HttpContext.Session?.SetString("Email", nameIdentifier ?? string.Empty);
+                    redirectToPage = "Index";
+                }
+                else
+                {
+                   HttpContext.Session?.Remove("Email");
+                   redirectToPage = "Login";
+                }
 
                 // Perform SAML response validation, such as checking the signature
                 // You may need to configure your SAML library for this step
@@ -41,7 +61,7 @@ namespace RaadTestSSO.Controllers
                 //FormsAuthentication.SetAuthCookie(username, false);
 
                 // Redirect to a post-login landing page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(redirectToPage, "Home");
             }
             catch (Exception ex)
             {
@@ -57,7 +77,6 @@ namespace RaadTestSSO.Controllers
         {
             try
             {
-
                 // Redirect to a post-login landing page
                 return RedirectToAction("Login", "Home");
             }
