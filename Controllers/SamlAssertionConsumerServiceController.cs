@@ -78,6 +78,11 @@ namespace RaadTestSSO.Controllers
             }
         }
 
+        /// <summary>
+        /// TO DO: Require to create a Single Logout(SLO) integration to call the below endpoint to
+        /// track user logout via Azure or Azure user expired session.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("saml/Logout")]
         public ActionResult SamlLogout()
